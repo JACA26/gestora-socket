@@ -16,8 +16,14 @@ const io = new Server(httpServer, {
 
 const PORT = process.env.PORT || 3003;
 
+const corsOptions = {
+	origin: "*", // Allow all origins
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow all methods
+	allowedHeaders: "Content-Type, Authorization, X-Requested-With, Accept", // Allow all headers
+}
+
 //habilitar cors
-app.use(cors());
+app.use(cors(corsOptions));
 
 //habilitar morgan
 app.use(morgan('dev'));
