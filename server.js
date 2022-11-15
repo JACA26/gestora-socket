@@ -1,6 +1,8 @@
 const express = require("express");
 const { createServer } = require("http");
+const morgan = require("morgan");
 const { Server } = require("socket.io");
+const cors = require("cors");
 const Comentarios = require("./models/comentarios");
 const Usuarios = require("./models/usuarios");
 
@@ -11,6 +13,15 @@ const io = new Server(httpServer, {
 		origin: "*",
 	}
 });
+
+const PORT = process.env.PORT || 3003;
+
+//habilitar cors
+app.use(cors());
+
+//habilitar morgan
+app.use(morgan('dev'));
+
 
 const userControl = new Usuarios();
 const comentarioControl = new Comentarios();
@@ -80,6 +91,6 @@ io.on("connection", (client) => {
 	});
 });
 
-httpServer.listen(3015, () => {
-	console.log("Servidor corriendo en puerto 3015");
+httpServer.listen(PORT, () => {
+	console.log(`Servidor corriendo en puerto ${PORT}`);
 });
