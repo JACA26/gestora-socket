@@ -32,6 +32,10 @@ app.use(morgan('dev'));
 const userControl = new Usuarios();
 const comentarioControl = new Comentarios();
 
+app.get("/", (req, res) => {
+	res.send("SOCKET SERVER RUNNING");
+});
+
 /* Usuario conectado */
 io.on("connection", (client) => {
 	/* 
